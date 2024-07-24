@@ -1,5 +1,7 @@
 package cafe;
 
+import cafe.database.ConnectionPool;
+import cafe.database.JdbcConnectionPool;
 import cafe.questions.ArticleRepository;
 import cafe.questions.MemoryArticleRepository;
 import cafe.users.MemoryUserRepository;
@@ -21,6 +23,10 @@ public class Factory {
 
     public ArticleRepository articleRepository() {
         return getOrCreate(ArticleRepository.class, MemoryArticleRepository::new);
+    }
+
+    public ConnectionPool connectionPool() {
+        return getOrCreate(ConnectionPool.class, () -> new JdbcConnectionPool("jdbc:h2:mem:test", "sa", "", 10));
     }
 
     protected <T> T getOrCreate(Class<T> beanClass, Supplier<T> supplier) {
