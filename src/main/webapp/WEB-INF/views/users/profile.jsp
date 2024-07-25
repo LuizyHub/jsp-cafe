@@ -10,8 +10,9 @@
         </h5>
         <p class="card-text">Email: ${user.email}
         </p>
-        <a href="${pageContext.request.contextPath}/users/edit/${user.id}" class="btn btn-primary">Edit Profile
-        </a>
+        <c:if test="${sessionScope.user.id == user.id}">
+            <a href="${pageContext.request.contextPath}/users/edit/${user.id}" class="btn btn-primary">Edit Profile</a>
+        </c:if>
     </div>
 </div>
 

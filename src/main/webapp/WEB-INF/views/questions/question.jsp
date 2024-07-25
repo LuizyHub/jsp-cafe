@@ -6,9 +6,15 @@
     <div class="col-md-8">
         <h2 class="mt-5">${article.title}</h2>
         <p class="text-muted">By
-            <%--            ${article.author}--%>
+            <c:choose>
+            <c:when test="${not empty user}">
+                ${user.username}
+            </c:when>
+            <c:otherwise>
             익명
-            on ${article.createdDate}</p>
+            </c:otherwise>
+            </c:choose>
+            on ${article.createdDate}
         <hr>
         <p>${article.content}</p>
         <c:if test="${not empty errorMessage}">

@@ -25,9 +25,15 @@ public class UserEditServlet extends MappingHttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = Long.valueOf(req.getPathInfo().substring(1));
+        User loginUser = (User) req.getSession().getAttribute("user");
+
+        if (loginUser == null || !loginUser.getId().equals(id)) {
+            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
+
         User user = userRepository.findById(id);
         req.setAttribute("user", user);
-
         req.getRequestDispatcher("/WEB-INF/views/users/editProfile.jsp").forward(req, resp);
     }
 
