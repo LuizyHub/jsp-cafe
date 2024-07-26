@@ -82,7 +82,8 @@ public class UserEditServlet extends MappingHttpServlet {
             return;
         }
 
-        userRepository.save(user.withEmail(email).withUsername(username).withPassword(currentPassword));
+        User save = userRepository.save(user.withEmail(email).withUsername(username).withPassword(currentPassword));
+        req.getSession().setAttribute("user", save);
         resp.sendRedirect("/users");
     }
 }
