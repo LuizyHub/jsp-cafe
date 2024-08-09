@@ -35,7 +35,7 @@ public class QuestionsServlet extends MappingHttpServlet {
                 .orElse(1);
 
         long totalArticles = articleRepository.count();
-        int totalPages = (int) ((totalArticles + totalArticles - 1) / PAGE_SIZE);
+        int totalPages = (int) ((totalArticles + PAGE_SIZE - 1) / PAGE_SIZE);
 
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalPages", totalPages);
